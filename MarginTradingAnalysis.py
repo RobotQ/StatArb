@@ -3,11 +3,14 @@ import tushare as ts
 import matplotlib.pyplot as plt
 import pandas as pd
 
-res = []
-years = range(2006, 2017)
-for year in years:
-    res.append(ts.shibor_data(year))
 
-df = pd.concat(res)
-plt.plot(df["date"], df["1W"])
+def get_shibor_data(startYear, endYear):
+    res = []
+    for year in range(startYear, endYear):
+        res.append(ts.shibor_data(year))
+    df = pd.concat(res)
+    return df
 
+
+test = get_shibor_data(2006, 2017)
+plt.plot(test["date"], test["1W"])
